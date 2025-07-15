@@ -64,7 +64,7 @@ fluidPage(
     sidebarPanel(
       fileInput("sample_file", "Choose Sample CSV File", accept = ".csv", multiple = TRUE),
       fileInput("scan_file", "Choose Scan CSV File", accept = ".csv", multiple = TRUE),
-      textInput("output_name", "Enter Output File Name (without extension)", value = "Inventory_x_sampling"),
+      textInput("output_name", "Enter Output File Name (without extension)", value = "Inventory_x_analysis"),
       selectizeInput("entry_name", "Name and surname", choices = entry_name_choices, selected = "Amanda Elineau", options=list(create=TRUE)),
       dateInput("selected_date", "Select Date", value = Sys.Date()), 
       textInput("id_lot", "ID Lot"),
