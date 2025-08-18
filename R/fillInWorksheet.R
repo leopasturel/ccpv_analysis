@@ -30,26 +30,26 @@ fillInWorksheet <- function(df_sample, df_scan, id_lot = NA, entry_names = NA, e
   # Process each row. First turn barcode column to character in case it has been recognized as numeric. Then split and categorize barcodes.
   result_list <- lapply(as.character(df_sample$barcode), function(cell_content) {
     barcodes <- unlist(strsplit(cell_content, "/"))
-
-    # Categorize each barcode
+    
+    # Initialize variables
     parent <- children <- initial <- ""
-    for (bc in barcodes) {
-      category <- categorize_barcode(bc)
-      if (category == "barcode_parent") {
-        parent <- c(parent, bc)
-      } else if (category == "barcode_children") {
-        children <- c(children, bc)
-      } else {
-        initial <- c(initial, bc)
+    
+    # Check if cell contains a value. Otherwise, pass.
+    if (!is.na(cell_content)) {
+      # Categorize each barcode
+      for (bc in barcodes) {
+        
+        category <- categorize_barcode(bc)
+        
+        if (category == "barcode_parent") {
+          parent <- c(parent, bc)
+        } else if (category == "barcode_children") {
+          children <- c(children, bc)
+        } else {
+          initial <- c(initial, bc)
+        }
       }
-      
-      print(parent)
-      print(length(parent))
-      print(children)
-      print(length(children))
-      print(initial)
-      print(length(initial))
-      }
+    }
     
     # return a df that contains barcodes
     return(data.frame(barcode = cell_content,
