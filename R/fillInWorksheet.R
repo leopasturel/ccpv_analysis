@@ -42,13 +42,20 @@ fillInWorksheet <- function(df_sample, df_scan, id_lot = NA, entry_names = NA, e
       } else {
         initial <- c(initial, bc)
       }
-    }
+      
+      print(parent)
+      print(length(parent))
+      print(children)
+      print(length(children))
+      print(initial)
+      print(length(initial))
+      }
     
     # return a df that contains barcodes
     return(data.frame(barcode = cell_content,
-                      barcode_parent = if (length(parent) > 0) paste(parent[parent != ""], collapse = "/") else NA,
-                      barcode_children = if (length(children) > 0) paste(children[children != ""], collapse = "/") else NA,
-                      barcode_initial = if (length(initial) > 0) paste(initial[initial != ""], collapse = "/") else NA))
+                      barcode_parent = if (length(parent) > 1) paste(parent[parent != ""], collapse = "/") else "x",
+                      barcode_children = if (length(children) > 1) paste(children[children != ""], collapse = "/") else "x",
+                      barcode_initial = if (length(initial) > 1) paste(initial[initial != ""], collapse = "/") else "x"))
   })
 
   
